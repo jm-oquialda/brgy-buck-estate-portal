@@ -1,0 +1,206 @@
+<?php
+$pageTitle = 'Home';
+require_once __DIR__ . '/includes/functions.php';
+startSession();
+
+$pdo = getDB();
+
+// Fetch latest announcements
+$annStmt = $pdo->query("SELECT * FROM announcements WHERE status = 'published' ORDER BY created_at DESC LIMIT 3");
+$announcements = $annStmt->fetchAll();
+
+// Fetch officials
+$offStmt = $pdo->query("SELECT * FROM officials WHERE is_active = TRUE ORDER BY order_num ASC");
+$officials = $offStmt->fetchAll();
+
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container hero__inner">
+        <div class="hero__content">
+            <span class="hero__eyebrow">Official Barangay Portal</span>
+            <h1 class="hero__title">Welcome to<br><span>Barangay Buck Estate</span></h1>
+            <p class="hero__subtitle">
+                Serving the residents of Buck Estate, Alfonso, Cavite with accessible and efficient digital barangay services.
+            </p>
+            <div class="hero__actions">
+                <?php if (!isLoggedIn()): ?>
+                    <a href="/auth/register.php" class="btn btn--primary btn--lg">Register Now</a>
+                    <a href="/auth/login.php" class="btn btn--outline-white btn--lg">Log In</a>
+                <?php else: ?>
+                    <a href="<?= isAdmin() ? '/admin/dashboard.php' : '/resident/dashboard.php' ?>" class="btn btn--primary btn--lg">Go to Dashboard</a>
+                <?php endif; ?>
+                <a href="/about.php" class="btn btn--outline-white btn--lg">Learn More</a>
+            </div>
+            <div class="hero__stats">
+                <div>
+                    <span class="hero__stat-num">3,638+</span>
+                    <span class="hero__stat-label">Residents (2020 Census)</span>
+                </div>
+                <div>
+                    <span class="hero__stat-num">4</span>
+                    <span class="hero__stat-label">Digital Services</span>
+                </div>
+                <div>
+                    <span class="hero__stat-num">24/7</span>
+                    <span class="hero__stat-label">Online Access</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">What We Offer</span>
+            <h2 class="section__title">Barangay Services Online</h2>
+            <p class="section__subtitle">Access barangay services anytime, from the comfort of your home.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-card__icon">📄</div>
+                <h3 class="service-card__title">Document Requests</h3>
+                <p class="service-card__desc">Request your Barangay Clearance, Certificate of Residency, or Certificate of Indigency online.</p>
+                <a href="<?= isLoggedIn() ? '/resident/document-request-new.php' : '/auth/login.php' ?>" class="service-card__link">Request Now →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">📋</div>
+                <h3 class="service-card__title">Blotter Reports</h3>
+                <p class="service-card__desc">File an incident report online. Describe the incident and let the barangay respond.</p>
+                <a href="<?= isLoggedIn() ? '/resident/blotter-new.php' : '/auth/login.php' ?>" class="service-card__link">File Report →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">💰</div>
+                <h3 class="service-card__title">Financial Assistance</h3>
+                <p class="service-card__desc">Apply for Medical, Burial, or Calamity assistance through the portal.</p>
+                <a href="<?= isLoggedIn() ? '/resident/financial-new.php' : '/auth/login.php' ?>" class="service-card__link">Apply Now →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon">📢</div>
+                <h3 class="service-card__title">Announcements</h3>
+                <p class="service-card__desc">Stay informed with the latest news, updates, and notices from the barangay.</p>
+                <a href="/announcements.php" class="service-card__link">View All →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ANNOUNCEMENTS -->
+<?php if (!empty($announcements)): ?>
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">Stay Updated</span>
+            <h2 class="section__title">Latest Announcements</h2>
+        </div>
+        <div class="announce-grid">
+            <?php foreach ($announcements as $ann): ?>
+            <div class="announce-card">
+                <div class="announce-card__body">
+                    <div class="announce-card__date">📅 <?= formatDateTime($ann['created_at']) ?></div>
+                    <h3 class="announce-card__title"><?= sanitize($ann['title']) ?></h3>
+                    <p class="announce-card__excerpt"><?= sanitize($ann['content']) ?></p>
+                </div>
+                <div class="announce-card__footer">
+                    <a href="/announcement.php?id=<?= $ann['id'] ?>" class="announce-card__link">Read More →</a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="text-center mt-3">
+            <a href="/announcements.php" class="btn btn--outline">View All Announcements</a>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+
+<!-- BUCK ESTATE IN PHOTOS -->
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">Our Community</span>
+            <h2 class="section__title">Barangay Buck Estate in Photos</h2>
+            <p class="section__subtitle">A glimpse of the beautiful landmarks and life in our barangay.</p>
+        </div>
+        <div class="photo-strip">
+            <div class="photo-strip__main">
+                <img src="https://images.unsplash.com/photo-1551634979-2b11f8c946fe?w=900&q=80"
+                     alt="Buck Estate greenery and landscape" loading="lazy">
+                <div class="photo-strip__label">Lush Greenery of Buck Estate</div>
+            </div>
+            <div class="photo-strip__side">
+                <div style="position:relative; overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=600&q=80"
+                         alt="Gardens in Alfonso Cavite" loading="lazy">
+                    <div class="photo-strip__label">Garden Scenery</div>
+                </div>
+                <div style="position:relative; overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
+                         alt="Residential area" loading="lazy">
+                    <div class="photo-strip__label">Royale Tagaytay Estates</div>
+                </div>
+            </div>
+            <div class="photo-strip__side">
+                <div style="position:relative; overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=600&q=80"
+                         alt="Alfonso Cavite cool highlands" loading="lazy">
+                    <div class="photo-strip__label">Cool Highland Climate</div>
+                </div>
+                <div style="position:relative; overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+                         alt="Community dining" loading="lazy">
+                    <div class="photo-strip__label">Fresh Local Produce</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OFFICIALS -->
+<?php if (!empty($officials)): ?>
+<section class="section">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">Leadership</span>
+            <h2 class="section__title">Barangay Officials</h2>
+            <p class="section__subtitle">Meet the elected leaders serving Barangay Buck Estate.</p>
+        </div>
+        <div class="officials-grid">
+            <?php foreach ($officials as $official): ?>
+            <div class="official-card">
+                <?php if (!empty($official['photo_url'])): ?>
+                    <img src="<?= sanitize($official['photo_url']) ?>" alt="<?= sanitize($official['name']) ?>" class="official-card__photo">
+                <?php else: ?>
+                    <div class="official-card__photo-placeholder">
+                        <?= strtoupper(substr($official['name'], 0, 1)) ?>
+                    </div>
+                <?php endif; ?>
+                <div class="official-card__name"><?= sanitize($official['name']) ?></div>
+                <div class="official-card__position"><?= sanitize($official['position']) ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- CTA BANNER -->
+<?php if (!isLoggedIn()): ?>
+<section class="section" style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent-dark) 100%); color: white;">
+    <div class="container text-center">
+        <h2 style="font-family: var(--font-heading); font-size: 28px; font-weight: 700; margin-bottom: 12px;">Ready to Access Barangay Services?</h2>
+        <p style="color: rgba(255,255,255,.8); margin-bottom: 28px; font-size: 16px;">Create a free account and start requesting documents, filing reports, and more — all online.</p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <a href="/auth/register.php" class="btn btn--primary btn--lg" style="background: white; color: var(--accent); border-color: white;">Create Account</a>
+            <a href="/auth/login.php" class="btn btn--outline-white btn--lg">Log In</a>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
