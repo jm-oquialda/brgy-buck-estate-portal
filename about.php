@@ -3,7 +3,9 @@ $pageTitle = 'About';
 require_once __DIR__ . '/includes/functions.php';
 startSession();
 $pdo = getDB();
-$officials = $pdo->query("SELECT * FROM officials WHERE is_active=TRUE ORDER BY order_num ASC")->fetchAll();
+$allOfficials = $pdo->query("SELECT * FROM officials WHERE is_active=TRUE ORDER BY order_num ASC")->fetchAll();
+$officials = array_filter($allOfficials, fn($o) => strpos($o['position'], 'SK ') !== 0);
+$skOfficials = array_filter($allOfficials, fn($o) => strpos($o['position'], 'SK ') === 0);
 require_once __DIR__ . '/includes/header.php';
 ?>
 
@@ -146,7 +148,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<!-- OFFICIALS -->
+<!-- BARANGAY OFFICIALS -->
 <?php if (!empty($officials)): ?>
 <section class="section">
     <div class="container">
@@ -157,6 +159,34 @@ require_once __DIR__ . '/includes/header.php';
         </div>
         <div class="officials-grid">
             <?php foreach ($officials as $o): ?>
+            <div class="official-card">
+                <?php if (!empty($o['photo_url'])): ?>
+                    <img src="<?= sanitize($o['photo_url']) ?>" alt="<?= sanitize($o['name']) ?>" class="official-card__photo">
+                <?php else: ?>
+                    <div class="official-card__photo-placeholder">
+                        <?= strtoupper(substr(trim($o['name']), 0, 1)) ?>
+                    </div>
+                <?php endif; ?>
+                <div class="official-card__name"><?= sanitize($o['name']) ?></div>
+                <div class="official-card__position"><?= sanitize($o['position']) ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- SK OFFICIALS -->
+<?php if (!empty($skOfficials)): ?>
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">Youth Leadership</span>
+            <h2 class="section__title">Sangguniang Kabataan Officials</h2>
+            <p class="section__subtitle">The youth council serving Barangay Buck Estate.</p>
+        </div>
+        <div class="officials-grid">
+            <?php foreach ($skOfficials as $o): ?>
             <div class="official-card">
                 <?php if (!empty($o['photo_url'])): ?>
                     <img src="<?= sanitize($o['photo_url']) ?>" alt="<?= sanitize($o['name']) ?>" class="official-card__photo">
