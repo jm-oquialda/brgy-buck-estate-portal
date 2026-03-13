@@ -9,13 +9,6 @@ $skOfficials = array_filter($allOfficials, fn($o) => strpos($o['position'], 'SK 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<div class="about-banner">
-    <img src="/assets/img/barangay-hall.jpg"
-         alt="Multi-Purpose Hall, Barangay Buck Estate, Alfonso, Cavite"
-         loading="eager">
-    <div class="about-banner__overlay"></div>
-</div>
-
 <div class="page-header">
     <div class="container">
         <h1 class="page-header__title">About Barangay Buck Estate</h1>
@@ -35,9 +28,17 @@ require_once __DIR__ . '/includes/header.php';
                 <p style="font-size:15px; line-height:1.9; color:var(--text); margin-bottom:16px;">
                     The barangay is known for its cool climate, lush landscapes, and proximity to popular destinations such as Sonya's Garden and the Royale Tagaytay Estates. According to the 2020 Census, Buck Estate has a population of approximately 3,638 residents, representing 6.13% of Alfonso's total population.
                 </p>
-                <p style="font-size:15px; line-height:1.9; color:var(--text);">
+                <p style="font-size:15px; line-height:1.9; color:var(--text); margin-bottom:24px;">
                     The Barangay Hall serves as the center of governance, providing essential services to all residents in the community. Through this portal, the barangay aims to make public services more accessible, transparent, and efficient for every resident.
                 </p>
+                
+                <!-- BARANGAY HALL PHOTO -->
+                <div class="about-banner" style="margin-top:24px;">
+                    <img src="/assets/img/barangay-hall.jpg"
+                         alt="Multi-Purpose Hall, Barangay Buck Estate, Alfonso, Cavite"
+                         loading="lazy"
+                         style="width:100%; height:auto; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+                </div>
             </div>
             <div>
                 <div class="card">
@@ -86,7 +87,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- MISSION VISION -->
-<section class="section section--gray">
+<section class="section">
     <div class="container">
         <div class="grid-2 stagger-children">
             <div class="card" style="border-top:4px solid var(--primary);">
@@ -113,7 +114,7 @@ require_once __DIR__ . '/includes/header.php';
 
 
 <!-- LANDMARKS -->
-<section class="section">
+<section class="section section--gray">
     <div class="container">
         <div class="section__header">
             <span class="section__eyebrow">Places of Interest</span>
