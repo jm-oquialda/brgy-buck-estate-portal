@@ -40,7 +40,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="grid-sidebar" style="gap:40px;">
 
-            <div>
+            <div class="fade-in-left">
                 <?php if ($sent): ?>
                     <div class="card" style="text-align:center; padding:48px 32px;">
                         <div style="font-size:56px; margin-bottom:16px;">✅</div>
@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/header.php';
                 <?php endif; ?>
             </div>
 
-            <div>
+            <div class="fade-in-right">
                 <div class="card">
                     <div class="card__header"><h3 class="card__title">📞 Get in Touch</h3></div>
                     <div class="card__body">
