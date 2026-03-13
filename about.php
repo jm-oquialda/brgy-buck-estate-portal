@@ -9,13 +9,6 @@ $skOfficials = array_filter($allOfficials, fn($o) => strpos($o['position'], 'SK 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<div class="about-banner">
-    <img src="/assets/img/barangay-hall.jpg"
-         alt="Multi-Purpose Hall, Barangay Buck Estate, Alfonso, Cavite"
-         loading="eager">
-    <div class="about-banner__overlay"></div>
-</div>
-
 <div class="page-header">
     <div class="container">
         <h1 class="page-header__title">About Barangay Buck Estate</h1>
@@ -85,8 +78,20 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
+<!-- BARANGAY HALL PHOTO -->
+<section class="section section--gray" style="padding-top:0;">
+    <div class="container">
+        <div class="about-banner">
+            <img src="/assets/img/barangay-hall.jpg"
+                 alt="Multi-Purpose Hall, Barangay Buck Estate, Alfonso, Cavite"
+                 loading="lazy"
+                 style="width:100%; height:auto; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+        </div>
+    </div>
+</section>
+
 <!-- MISSION VISION -->
-<section class="section section--gray">
+<section class="section">
     <div class="container">
         <div class="grid-2 stagger-children">
             <div class="card" style="border-top:4px solid var(--primary);">
@@ -113,7 +118,7 @@ require_once __DIR__ . '/includes/header.php';
 
 
 <!-- LANDMARKS -->
-<section class="section">
+<section class="section section--gray">
     <div class="container">
         <div class="section__header">
             <span class="section__eyebrow">Places of Interest</span>
