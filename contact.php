@@ -145,4 +145,94 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
+<!-- EMERGENCY HOTLINES -->
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header fade-in">
+            <span class="section__eyebrow">Emergency Response</span>
+            <h2 class="section__title">Emergency Hotlines</h2>
+            <p class="section__subtitle">Keep these numbers handy for emergencies and urgent concerns in Barangay Buck Estate.</p>
+        </div>
+        
+        <div class="card" style="background: linear-gradient(135deg, var(--primary) 0%, #2a3f7d 100%); border: none; box-shadow: 0 10px 40px rgba(27, 42, 107, 0.2);">
+            <div class="card__body" style="padding: 40px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                    <div class="hotline-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 32px; flex-shrink: 0;">📞</div>
+                            <div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px;">Brgy. Buck Estate Hotline</div>
+                                <div style="color: white; font-weight: 600; font-size: 16px;"><a href="tel:09637890011" style="color: white; text-decoration: none;">0963-789-0011</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotline-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 32px; flex-shrink: 0;">🏥</div>
+                            <div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px;">Municipal Health Office</div>
+                                <div style="color: white; font-weight: 600; font-size: 16px;"><a href="tel:09166191088" style="color: white; text-decoration: none;">0916-619-1088</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotline-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 32px; flex-shrink: 0;">🤝</div>
+                            <div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px;">Municipal Social Welfare & Dev't</div>
+                                <div style="color: white; font-weight: 600; font-size: 16px;"><a href="tel:09178031253" style="color: white; text-decoration: none;">0917-803-1253</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotline-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 32px; flex-shrink: 0;">🚔</div>
+                            <div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px;">Municipal Police Station</div>
+                                <div style="color: white; font-weight: 600; font-size: 15px;">
+                                    <a href="tel:09065366135" style="color: white; text-decoration: none;">0906-536-6135</a><br>
+                                    <a href="tel:09985985614" style="color: white; text-decoration: none;">0998-598-5614</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotline-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 32px; flex-shrink: 0;">🚒</div>
+                            <div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px;">Bureau of Fire Protection</div>
+                                <div style="color: white; font-weight: 600; font-size: 15px;">
+                                    <a href="tel:09296632424" style="color: white; text-decoration: none;">0929-663-2424</a><br>
+                                    <a href="tel:09156022113" style="color: white; text-decoration: none;">0915-602-2113</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotline-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="font-size: 32px; flex-shrink: 0;">🛟</div>
+                            <div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px;">MDRRMO</div>
+                                <div style="color: white; font-weight: 600; font-size: 15px;">
+                                    <a href="tel:09178330206" style="color: white; text-decoration: none;">0917-833-0206</a><br>
+                                    <a href="tel:09618667777" style="color: white; text-decoration: none;">0961-866-7777</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 32px; text-align: center; padding: 16px; background: rgba(200, 52, 107, 0.2); border-radius: 12px; border: 2px solid rgba(200, 52, 107, 0.3);">
+                    <div style="color: white; font-weight: 700; font-size: 18px; font-family: var(--font-heading);">🚨 KEEP SAFE, EVERYONE!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

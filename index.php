@@ -54,74 +54,9 @@ require_once __DIR__ . '/includes/header.php';
         <div class="hero__photo">
             <img src="/assets/img/officials-award.jpg"
                  alt="Barangay Buck Estate - 2025 Most Outstanding Barangay Awardees"
-                 loading="eager">
+                 loading="eager"
+                 style="border-radius: 12px;">
             <div class="hero__photo-caption">2025 Most Outstanding Barangay</div>
-        </div>
-    </div>
-</section>
-
-<!-- EMERGENCY HOTLINES BANNER -->
-<section class="section" style="padding:0; margin-top:-40px;">
-    <div class="container">
-        <div class="hotlines-banner">
-            <div class="hotlines-banner__header">
-                <div class="hotlines-banner__title">BUCK ESTATE</div>
-                <div class="hotlines-banner__subtitle">Emergency Hotlines</div>
-            </div>
-            <div class="hotlines-banner__body">
-                <div class="hotline-item">
-                    <div class="hotline-item__icon">📞</div>
-                    <div class="hotline-item__info">
-                        <span class="hotline-item__label">Brgy. Buck Estate Hotline</span>
-                        <span class="hotline-item__number"><a href="tel:09637890011">0963-789-0011</a></span>
-                    </div>
-                </div>
-                <div class="hotline-item">
-                    <div class="hotline-item__icon">🏥</div>
-                    <div class="hotline-item__info">
-                        <span class="hotline-item__label">Municipal Health Office</span>
-                        <span class="hotline-item__number"><a href="tel:09166191088">0916-619-1088</a></span>
-                    </div>
-                </div>
-                <div class="hotline-item">
-                    <div class="hotline-item__icon">🤝</div>
-                    <div class="hotline-item__info">
-                        <span class="hotline-item__label">Municipal Social Welfare &amp; Dev't</span>
-                        <span class="hotline-item__number"><a href="tel:09178031253">0917-803-1253</a></span>
-                    </div>
-                </div>
-                <div class="hotline-item">
-                    <div class="hotline-item__icon">🚔</div>
-                    <div class="hotline-item__info">
-                        <span class="hotline-item__label">Municipal Police Station</span>
-                        <span class="hotline-item__number">
-                            <a href="tel:09065366135">0906-536-6135</a><br>
-                            <a href="tel:09985985614">0998-598-5614</a>
-                        </span>
-                    </div>
-                </div>
-                <div class="hotline-item">
-                    <div class="hotline-item__icon">🚒</div>
-                    <div class="hotline-item__info">
-                        <span class="hotline-item__label">Bureau of Fire Protection</span>
-                        <span class="hotline-item__number">
-                            <a href="tel:09296632424">0929-663-2424</a><br>
-                            <a href="tel:09156022113">0915-602-2113</a>
-                        </span>
-                    </div>
-                </div>
-                <div class="hotline-item">
-                    <div class="hotline-item__icon">🛟</div>
-                    <div class="hotline-item__info">
-                        <span class="hotline-item__label">MDRRMO</span>
-                        <span class="hotline-item__number">
-                            <a href="tel:09178330206">0917-833-0206</a><br>
-                            <a href="tel:09618667777">0961-866-7777</a>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="hotlines-banner__footer">KEEP SAFE, EVERYONE!</div>
         </div>
     </div>
 </section>
