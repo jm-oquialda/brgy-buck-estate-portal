@@ -51,42 +51,96 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
         </div>
+        <div class="hero__photo">
+            <img src="/assets/img/officials-award.jpg"
+                 alt="Barangay Buck Estate - 2025 Most Outstanding Barangay Awardees"
+                 loading="eager">
+        </div>
     </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES + EMERGENCY HOTLINES SIDEBAR -->
 <section class="section">
     <div class="container">
-        <div class="section__header">
-            <span class="section__eyebrow">What We Offer</span>
-            <h2 class="section__title">Barangay Services Online</h2>
-            <p class="section__subtitle">Access barangay services anytime, from the comfort of your home.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-card__icon">📄</div>
-                <h3 class="service-card__title">Document Requests</h3>
-                <p class="service-card__desc">Request your Barangay Clearance, Certificate of Residency, or Certificate of Indigency online.</p>
-                <a href="<?= isLoggedIn() ? '/resident/document-request-new.php' : '/auth/login.php' ?>" class="service-card__link">Request Now →</a>
+        <div class="home-with-sidebar">
+            <div>
+                <!-- SERVICES -->
+                <div class="section__header" style="margin-bottom:32px;">
+                    <span class="section__eyebrow">What We Offer</span>
+                    <h2 class="section__title">Barangay Services Online</h2>
+                    <p class="section__subtitle">Access barangay services anytime, from the comfort of your home.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-card__icon">📄</div>
+                        <h3 class="service-card__title">Document Requests</h3>
+                        <p class="service-card__desc">Request your Barangay Clearance, Certificate of Residency, or Certificate of Indigency online.</p>
+                        <a href="<?= isLoggedIn() ? '/resident/document-request-new.php' : '/auth/login.php' ?>" class="service-card__link">Request Now →</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-card__icon">📋</div>
+                        <h3 class="service-card__title">Blotter Reports</h3>
+                        <p class="service-card__desc">File an incident report online. Describe the incident and let the barangay respond.</p>
+                        <a href="<?= isLoggedIn() ? '/resident/blotter-new.php' : '/auth/login.php' ?>" class="service-card__link">File Report →</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-card__icon">💰</div>
+                        <h3 class="service-card__title">Financial Assistance</h3>
+                        <p class="service-card__desc">Apply for Medical, Burial, or Calamity assistance through the portal.</p>
+                        <a href="<?= isLoggedIn() ? '/resident/financial-new.php' : '/auth/login.php' ?>" class="service-card__link">Apply Now →</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-card__icon">📢</div>
+                        <h3 class="service-card__title">Announcements</h3>
+                        <p class="service-card__desc">Stay informed with the latest news, updates, and notices from the barangay.</p>
+                        <a href="/announcements.php" class="service-card__link">View All →</a>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-card__icon">📋</div>
-                <h3 class="service-card__title">Blotter Reports</h3>
-                <p class="service-card__desc">File an incident report online. Describe the incident and let the barangay respond.</p>
-                <a href="<?= isLoggedIn() ? '/resident/blotter-new.php' : '/auth/login.php' ?>" class="service-card__link">File Report →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card__icon">💰</div>
-                <h3 class="service-card__title">Financial Assistance</h3>
-                <p class="service-card__desc">Apply for Medical, Burial, or Calamity assistance through the portal.</p>
-                <a href="<?= isLoggedIn() ? '/resident/financial-new.php' : '/auth/login.php' ?>" class="service-card__link">Apply Now →</a>
-            </div>
-            <div class="service-card">
-                <div class="service-card__icon">📢</div>
-                <h3 class="service-card__title">Announcements</h3>
-                <p class="service-card__desc">Stay informed with the latest news, updates, and notices from the barangay.</p>
-                <a href="/announcements.php" class="service-card__link">View All →</a>
-            </div>
+
+            <!-- EMERGENCY HOTLINES SIDEBAR -->
+            <aside>
+                <div class="hotlines-banner">
+                    <div class="hotlines-banner__title">BUCK ESTATE</div>
+                    <div class="hotlines-banner__subtitle">Emergency Hotlines</div>
+
+                    <div class="hotline-item">
+                        <span class="hotline-item__label">Brgy. Buck Estate Hotline</span>
+                        <span class="hotline-item__number"><a href="tel:09637890011">0963-789-0011</a></span>
+                    </div>
+                    <div class="hotline-item">
+                        <span class="hotline-item__label">Municipal Health Office</span>
+                        <span class="hotline-item__number"><a href="tel:09166191088">0916-619-1088</a></span>
+                    </div>
+                    <div class="hotline-item">
+                        <span class="hotline-item__label">Municipal Social Welfare &amp; Development</span>
+                        <span class="hotline-item__number"><a href="tel:09178031253">0917-803-1253</a></span>
+                    </div>
+                    <div class="hotline-item">
+                        <span class="hotline-item__label">Municipal Police Station</span>
+                        <span class="hotline-item__number">
+                            <a href="tel:09065366135">0906-536-6135</a><br>
+                            <a href="tel:09985985614">0998-598-5614</a>
+                        </span>
+                    </div>
+                    <div class="hotline-item">
+                        <span class="hotline-item__label">Bureau of Fire Protection</span>
+                        <span class="hotline-item__number">
+                            <a href="tel:09296632424">0929-663-2424</a><br>
+                            <a href="tel:09156022113">0915-602-2113</a>
+                        </span>
+                    </div>
+                    <div class="hotline-item">
+                        <span class="hotline-item__label">MDRRMO</span>
+                        <span class="hotline-item__number">
+                            <a href="tel:09178330206">0917-833-0206</a><br>
+                            <a href="tel:09618667777">0961-866-7777</a>
+                        </span>
+                    </div>
+
+                    <div class="hotlines-banner__footer">KEEP SAFE, EVERYONE!</div>
+                </div>
+            </aside>
         </div>
     </div>
 </section>
@@ -121,47 +175,6 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 
-<!-- BUCK ESTATE IN PHOTOS -->
-<section class="section section--gray">
-    <div class="container">
-        <div class="section__header">
-            <span class="section__eyebrow">Our Community</span>
-            <h2 class="section__title">Barangay Buck Estate in Photos</h2>
-            <p class="section__subtitle">A glimpse of the beautiful landmarks and life in our barangay.</p>
-        </div>
-        <div class="photo-strip">
-            <div class="photo-strip__main">
-                <img src="https://images.unsplash.com/photo-1551634979-2b11f8c946fe?w=900&q=80"
-                     alt="Buck Estate greenery and landscape" loading="lazy">
-                <div class="photo-strip__label">Lush Greenery of Buck Estate</div>
-            </div>
-            <div class="photo-strip__side">
-                <div style="position:relative; overflow:hidden;">
-                    <img src="https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=600&q=80"
-                         alt="Gardens in Alfonso Cavite" loading="lazy">
-                    <div class="photo-strip__label">Garden Scenery</div>
-                </div>
-                <div style="position:relative; overflow:hidden;">
-                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
-                         alt="Residential area" loading="lazy">
-                    <div class="photo-strip__label">Royale Tagaytay Estates</div>
-                </div>
-            </div>
-            <div class="photo-strip__side">
-                <div style="position:relative; overflow:hidden;">
-                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=600&q=80"
-                         alt="Alfonso Cavite cool highlands" loading="lazy">
-                    <div class="photo-strip__label">Cool Highland Climate</div>
-                </div>
-                <div style="position:relative; overflow:hidden;">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
-                         alt="Community dining" loading="lazy">
-                    <div class="photo-strip__label">Fresh Local Produce</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- BARANGAY OFFICIALS -->
 <?php if (!empty($officials)): ?>

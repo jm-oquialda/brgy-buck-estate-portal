@@ -362,13 +362,135 @@ select.form-control { cursor: pointer; background-image: url("data:image/svg+xml
     color: #fff;
 }
 
-/* ── Hero Background Image ─────────────────────── */
+/* ── Hero Background ──────────────────────────── */
 .hero {
-    background-image: linear-gradient(135deg, rgba(27,42,107,0.82) 0%, rgba(200,52,107,0.55) 100%),
-                      url('https://images.unsplash.com/photo-1604999565976-8913ad2ddb37?w=1600&q=80');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #2a3f9e 100%);
+}
+.hero__photo {
+    flex-shrink: 0;
+    max-width: 420px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid rgba(255,255,255,.15);
+}
+.hero__photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+@media (max-width: 1024px) {
+    .hero__photo { display: none; }
+}
+
+/* ── About Page Banner Image ─────────────────── */
+.about-banner {
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+.about-banner img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+.about-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(27,42,107,0.3) 0%, rgba(27,42,107,0.7) 100%);
+}
+
+/* ── Emergency Hotlines Banner ───────────────── */
+.hotlines-banner {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--danger);
+    box-shadow: var(--shadow);
+    padding: 28px 24px;
+    position: sticky;
+    top: 88px;
+}
+.hotlines-banner__title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--danger);
+    text-align: center;
+    margin-bottom: 4px;
+}
+.hotlines-banner__subtitle {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--gray-200);
+}
+.hotline-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-100);
+}
+.hotline-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.hotline-item__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--white);
+    background: var(--danger);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+.hotline-item__number {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+    line-height: 1.4;
+}
+.hotline-item__number a {
+    color: var(--primary);
+    text-decoration: none;
+}
+.hotline-item__number a:hover {
+    color: var(--accent);
+}
+.hotlines-banner__footer {
+    text-align: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--gray-200);
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--success);
+}
+
+/* ── Home Content with Sidebar ───────────────── */
+.home-with-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+    align-items: start;
+}
+@media (max-width: 1024px) {
+    .home-with-sidebar {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ── Landmark Gallery ──────────────────────────── */
