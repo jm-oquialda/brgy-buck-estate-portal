@@ -12,6 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($id && in_array($action, ['Approved','Denied','Pending'])) {
         $stmt = $pdo->prepare("UPDATE financial_requests SET status=?, admin_remarks=?, processed_by=?, processed_at=NOW() WHERE id=?");
         $stmt->execute([$action, $remarks, $_SESSION['user_id'], $id]);
+
+        // Notify resident
+        $req = $pdo->prepare("SELECT user_id, assistance_type FROM financial_requests WHERE id=?");
+        $req->execute([$id]);
+        $reqData = $req->fetch();
+        if ($reqData) {
+            $msgs = [
+                'Approved' => 'Your ' . $reqData['assistance_type'] . ' Assistance application has been approved. Please visit the Barangay Hall to complete processing.',
+                'Denied'   => 'Your ' . $reqData['assistance_type'] . ' Assistance application has been denied.' . ($remarks ? ' Remarks: ' . $remarks : ''),
+                'Pending'  => 'Your ' . $reqData['assistance_type'] . ' Assistance application has been set back to pending.',
+            ];
+            createNotification(
+                $reqData['user_id'],
+                $action === 'Approved' ? 'success' : ($action === 'Denied' ? 'error' : 'info'),
+                'Financial Assistance #' . $id . ' — ' . $action,
+                $msgs[$action] ?? 'Your financial assistance status has been updated.',
+                '/resident/financial.php?id=' . $id
+            );
+        }
+
         setFlash('success', "Financial request #$id marked as $action.");
     }
     header('Location: /admin/financial.php');

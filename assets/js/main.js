@@ -106,3 +106,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// ── Notification dismiss (global scope) ─────────────────────
+function dismissNotif(id, btn) {
+    const item = btn.closest('.notif-item');
+    fetch('/api/dismiss-notification.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+    });
+    item.style.transition = 'opacity .3s, max-height .3s, padding .3s, margin .3s';
+    item.style.opacity = '0';
+    item.style.maxHeight = '0';
+    item.style.padding = '0';
+    item.style.marginBottom = '0';
+    item.style.overflow = 'hidden';
+    setTimeout(() => {
+        item.remove();
+        const bar = document.getElementById('notifBar');
+        if (bar && bar.querySelectorAll('.notif-item').length === 0) {
+            bar.remove();
+        }
+    }, 300);
+}
+
+function dismissAllNotifs() {
+    fetch('/api/dismiss-notification.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ all: true })
+    });
+    const bar = document.getElementById('notifBar');
+    if (bar) {
+        bar.style.transition = 'opacity .3s';
+        bar.style.opacity = '0';
+        setTimeout(() => bar.remove(), 300);
+    }
+}

@@ -14,6 +14,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($id && in_array($action, $allowed)) {
         $stmt = $pdo->prepare("UPDATE blotter_reports SET status=?, admin_remarks=?, case_number=?, processed_by=?, updated_at=NOW() WHERE id=?");
         $stmt->execute([$action, $remarks, $case_number ?: null, $_SESSION['user_id'], $id]);
+
+        // Notify resident
+        $req = $pdo->prepare("SELECT user_id, incident_type FROM blotter_reports WHERE id=?");
+        $req->execute([$id]);
+        $reqData = $req->fetch();
+        if ($reqData) {
+            $msgs = [
+                'Under Review' => 'Your blotter report (' . $reqData['incident_type'] . ') is now under review by the barangay.',
+                'Resolved'     => 'Your blotter report (' . $reqData['incident_type'] . ') has been resolved.' . ($remarks ? ' Remarks: ' . $remarks : ''),
+                'Dismissed'    => 'Your blotter report (' . $reqData['incident_type'] . ') has been dismissed.' . ($remarks ? ' Remarks: ' . $remarks : ''),
+                'Filed'        => 'Your blotter report (' . $reqData['incident_type'] . ') status has been updated.',
+            ];
+            createNotification(
+                $reqData['user_id'],
+                $action === 'Resolved' ? 'success' : ($action === 'Dismissed' ? 'error' : 'info'),
+                'Blotter Report #' . $id . ' — ' . $action,
+                $msgs[$action] ?? 'Your blotter report status has been updated.',
+                '/resident/blotter.php?id=' . $id
+            );
+        }
+
         setFlash('success', "Blotter Report #$id updated to $action.");
     }
     header('Location: /admin/blotter-reports.php');
