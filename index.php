@@ -51,6 +51,12 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
         </div>
+        <div class="hero__photo">
+            <img src="/assets/img/officials-award.jpg"
+                 alt="Barangay Buck Estate - 2025 Most Outstanding Barangay Awardees"
+                 loading="eager">
+            <div class="hero__photo-caption">2025 Most Outstanding Barangay</div>
+        </div>
     </div>
 </section>
 
