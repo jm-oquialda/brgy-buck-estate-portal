@@ -15,8 +15,11 @@ define('DB_PASS', '8dgqm60WQbIU');          // Replace with your database passwo
 define('SITE_NAME',     'Barangay Buck Estate');
 define('SITE_TAGLINE',  'Serving the Community of Buck Estate, Alfonso, Cavite');
 define('SITE_ADDRESS',  'Buck Estate, Alfonso, Cavite 4123');
-define('SITE_CONTACT',  '0908-361-4201');       // Replace with actual contact number
-define('SITE_EMAIL',    'brgy.buckestate@gmail.com'); // Replace with actual email
+define('SITE_CONTACT',  '0963-789-0011');
+define('SITE_EMAIL',    'alfonsobuckestate@gmail.com');
+define('SITE_FB_OFFICIAL', 'https://www.facebook.com/BuckEstate');
+define('SITE_FB_COMMUNITY', 'https://www.facebook.com/groups/168372726641403');
+define('SITE_FB_SK',    'https://www.facebook.com/brgy.buckestatesk');
 define('SITE_ZIPCODE',  '4123');
 
 // Session

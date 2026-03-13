@@ -102,12 +102,25 @@ INSERT INTO `announcements` (`title`,`content`,`posted_by`,`status`) VALUES
 ('Free Medical Mission','A free medical mission will be conducted at the Barangay Hall. Bring a valid ID. No appointment needed. Services include free consultation, medicine, and laboratory tests for qualified residents.',1,'published');
 
 INSERT INTO `officials` (`name`,`position`,`order_num`) VALUES
-('Aimy Delima Casabuena','Punong Barangay',1),
-('Larry Noveno Catapang','Kagawad',2),
-('Michael Añonuevo Villalobos','Kagawad',3),
-('Ailene Jimenez Cosa','Kagawad',4),
-('Emeterio Gonzales Tibayan','Kagawad',5),
-('Antonio Constante Bersamina','Kagawad',6),
-('Jesus Rollo Teaño','Kagawad',7),
-('Fernando Sanchez Rosel','Kagawad',8),
-('Jessa Mae Villalobos Constante','SK Chairperson',9);
+-- Barangay Officials
+('Aimy Casabuena','Punong Barangay',1),
+('Diana Igaya','Barangay Secretary',2),
+('Maricel Salandanan','Barangay Treasurer',3),
+('Antonio Bersamina','Kagawad | Committee Chairman on Agriculture and Environment Protection',4),
+('Joselito Caimoy','Kagawad | Committee Chairman on Ways and Means',5),
+('Jessa Mae Constante','Kagawad | Committee Chairwoman on Women & Family Welfare & Education',6),
+('Jesus Teano','Kagawad | Committee Chairman on Peace and Order, Anti-Drugs, Public Safety and Human Rights',7),
+('Danilo Bersamina','Kagawad | Committee on Cooperative Development, Livelihood, and Employment',8),
+('Larry Catapang','Kagawad | Committee Chairman on Appropriation and Public Works and Infrastructure',9),
+('Michael Villalobos','Kagawad | Committee Chairman on Health and BDRRMC',10),
+-- SK Officials
+('Mickaellah P. Constante','SK Chairperson | Committee Chairwoman on Youth & Sports Development and Tourism',11),
+('Lylane Marie D. Caimoy','SK Secretary',12),
+('Loyd Gabrielle C. Leonor','SK Treasurer',13),
+('John Carlo Alcaraz','SK Member',14),
+('Judy Ann L. Bislig','SK Member',15),
+('Ma. Lourdes R. Noveno','SK Member',16),
+('Julianne Patrice D. Tabor','SK Member',17),
+('Ronalyn C. Nuestro','SK Member',18),
+('Zedrick G. Bautista','SK Member',19),
+('Ken Cedrix N. Zaldivar','SK Member',20);
