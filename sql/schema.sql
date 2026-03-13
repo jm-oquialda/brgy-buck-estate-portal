@@ -103,18 +103,18 @@ INSERT INTO `announcements` (`title`,`content`,`image_url`,`posted_by`,`status`)
 ('Mobile Registration of Local Civil Registrar','The Local Civil Registrar will conduct a Mobile Registration at the Barangay Hall on March 11, 2026, starting at 9:00 AM. For inquiries, contact 0917-125-9237 or visit the official Brgy. Buck Estate Facebook page.','/assets/img/announcements/mobile-registration-2026.jpg',1,'published'),
 ('Nutrition Month Celebration 2024','The Barangay Council for the Protection of Children and Barangay Nutrition Council (BCPC and BNC) held a Nutrition Month Celebration on July 26, 2024 at the Covered Court, Buck Estate, Alfonso, Cavite. The event promoted the Philippine Plan of Action for Nutrition (PPAN) 2023-2028 under the theme \"Sa PPAN, Sama-sama sa Nutrisyong Sapat Para sa Lahat!\"','/assets/img/announcements/nutrition-month-2024.jpg',1,'published');
 
-INSERT INTO `officials` (`name`,`position`,`order_num`) VALUES
+INSERT INTO `officials` (`name`,`position`,`photo_url`,`order_num`) VALUES
 -- Barangay Officials
-('Aimy Casabuena','Punong Barangay',1),
-('Diana Igaya','Barangay Secretary',2),
-('Maricel Salandanan','Barangay Treasurer',3),
-('Antonio Bersamina','Kagawad | Committee Chairman on Agriculture and Environment Protection',4),
-('Joselito Caimoy','Kagawad | Committee Chairman on Ways and Means',5),
-('Jessa Mae Constante','Kagawad | Committee Chairwoman on Women & Family Welfare & Education',6),
-('Jesus Teano','Kagawad | Committee Chairman on Peace and Order, Anti-Drugs, Public Safety and Human Rights',7),
-('Danilo Bersamina','Kagawad | Committee on Cooperative Development, Livelihood, and Employment',8),
-('Larry Catapang','Kagawad | Committee Chairman on Appropriation and Public Works and Infrastructure',9),
-('Michael Villalobos','Kagawad | Committee Chairman on Health and BDRRMC',10),
+('Aimy Casabuena','Punong Barangay','/assets/img/officials/aimy-casabuena.jpg',1),
+('Diana Igaya','Barangay Secretary','/assets/img/officials/diana-igaya.jpg',2),
+('Maricel Salandanan','Barangay Treasurer','/assets/img/officials/maricel-salandanan.jpg',3),
+('Antonio Bersamina','Kagawad | Committee Chairman on Agriculture and Environment Protection','/assets/img/officials/antonio-bersamina.jpg',4),
+('Joselito Caimoy','Kagawad | Committee Chairman on Ways and Means','/assets/img/officials/joselito-caimoy.jpg',5),
+('Jessa Mae Constante','Kagawad | Committee Chairwoman on Women & Family Welfare & Education','/assets/img/officials/jessa-mae-constante.jpg',6),
+('Jesus Teano','Kagawad | Committee Chairman on Peace and Order, Anti-Drugs, Public Safety and Human Rights','/assets/img/officials/jesus-teano.jpg',7),
+('Danilo Bersamina','Kagawad | Committee on Cooperative Development, Livelihood, and Employment','/assets/img/officials/danilo-bersamina.jpg',8),
+('Larry Catapang','Kagawad | Committee Chairman on Appropriation and Public Works and Infrastructure','/assets/img/officials/larry-catapang.jpg',9),
+('Michael Villalobos','Kagawad | Committee Chairman on Health and BDRRMC','/assets/img/officials/michael-villalobos.jpg',10),
 -- SK Officials
 ('Mickaellah P. Constante','SK Chairperson | Committee Chairwoman on Youth & Sports Development and Tourism',11),
 ('Lylane Marie D. Caimoy','SK Secretary',12),
