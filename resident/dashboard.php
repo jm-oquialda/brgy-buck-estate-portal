@@ -46,7 +46,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <section class="section--sm">
     <div class="container">
-        <div class="stat-cards">
+        <div class="stat-cards stagger-children">
             <div class="stat-card">
                 <div class="stat-card__label">Document Requests</div>
                 <div class="stat-card__value"><?= $totalDocs ?></div>
@@ -65,7 +65,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <!-- TABS -->
-        <div class="card" data-tabs>
+        <div class="card fade-in" data-tabs>
             <div class="card__header">
                 <div class="tabs" style="border-bottom:none; margin-bottom:0;">
                     <button class="tab-btn active" data-tab="tab-docs">📄 Document Requests</button>

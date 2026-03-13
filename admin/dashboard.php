@@ -41,7 +41,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <section class="section--sm">
     <div class="container">
-        <div class="stat-cards" style="grid-template-columns: repeat(4,1fr);">
+        <div class="stat-cards stagger-children" style="grid-template-columns: repeat(4,1fr);">
             <div class="stat-card stat-card--accent">
                 <div class="stat-card__label">Pending Documents</div>
                 <div class="stat-card__value"><?= $counts['pending_docs'] ?></div>
@@ -65,7 +65,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <!-- QUICK LINKS -->
-        <div class="grid-3 mb-3">
+        <div class="grid-3 mb-3 stagger-children">
             <a href="/admin/announcements.php" class="card" style="padding:18px 20px; display:flex; align-items:center; gap:12px; text-decoration:none; transition:var(--transition);"
                onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--gray-200)'">
                 <div style="font-size:28px;">📢</div>
@@ -93,7 +93,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <!-- RECENT ACTIVITY -->
-        <div class="card">
+        <div class="card fade-in">
             <div class="card__header">
                 <h2 class="card__title">Recent Activity</h2>
             </div>

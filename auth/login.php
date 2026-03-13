@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <div class="auth-page">
-    <div class="auth-card">
+    <div class="auth-card scale-in">
         <div class="auth-card__logo">
             <div class="auth-card__logo-circle">BE</div>
             <div class="auth-card__logo-name">Brgy. Buck Estate</div>

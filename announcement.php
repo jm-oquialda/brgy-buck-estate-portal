@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/header.php';
 </div>
 <section class="section--sm">
     <div class="container" style="max-width:800px;">
-        <div class="announce-detail">
+        <div class="announce-detail fade-in">
             <h1 class="announce-detail__title"><?= sanitize($ann['title']) ?></h1>
             <div class="announce-detail__meta">
                 <span>📅 <?= formatDateTime($ann['created_at']) ?></span>

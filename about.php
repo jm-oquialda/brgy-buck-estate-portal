@@ -19,7 +19,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section">
     <div class="container">
         <div class="grid-sidebar" style="gap:40px;">
-            <div>
+            <div class="fade-in-left">
                 <span class="section__eyebrow">Our Barangay</span>
                 <h2 class="section__title" style="text-align:left; margin-bottom:20px;">Barangay Buck Estate, Alfonso, Cavite</h2>
                 <p style="font-size:15px; line-height:1.9; color:var(--text); margin-bottom:16px;">
@@ -40,7 +40,7 @@ require_once __DIR__ . '/includes/header.php';
                          style="width:100%; height:auto; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
                 </div>
             </div>
-            <div>
+            <div class="fade-in-right">
                 <div class="card">
                     <div class="card__header"><h3 class="card__title">📍 Quick Facts</h3></div>
                     <div class="card__body">
@@ -116,7 +116,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- LANDMARKS -->
 <section class="section section--gray">
     <div class="container">
-        <div class="section__header">
+        <div class="section__header fade-in">
             <span class="section__eyebrow">Places of Interest</span>
             <h2 class="section__title">Landmarks in Barangay Buck Estate</h2>
             <p class="section__subtitle">Discover what makes Buck Estate a vibrant and well-known barangay in Alfonso, Cavite.</p>
@@ -160,12 +160,12 @@ require_once __DIR__ . '/includes/header.php';
 <?php if (!empty($officials)): ?>
 <section class="section">
     <div class="container">
-        <div class="section__header">
+        <div class="section__header fade-in">
             <span class="section__eyebrow">Leadership</span>
             <h2 class="section__title">Elected Barangay Officials</h2>
             <p class="section__subtitle">Serving the constituents of Barangay Buck Estate, Alfonso, Cavite.</p>
         </div>
-        <div class="officials-grid">
+        <div class="officials-grid stagger-children">
             <?php foreach ($officials as $o): ?>
             <div class="official-card">
                 <?php if (!empty($o['photo_url'])): ?>
@@ -188,12 +188,12 @@ require_once __DIR__ . '/includes/header.php';
 <?php if (!empty($skOfficials)): ?>
 <section class="section section--gray">
     <div class="container">
-        <div class="section__header">
+        <div class="section__header fade-in">
             <span class="section__eyebrow">Youth Leadership</span>
             <h2 class="section__title">Sangguniang Kabataan Officials</h2>
             <p class="section__subtitle">The youth council serving Barangay Buck Estate.</p>
         </div>
-        <div class="officials-grid">
+        <div class="officials-grid stagger-children">
             <?php foreach ($skOfficials as $o): ?>
             <div class="official-card">
                 <?php if (!empty($o['photo_url'])): ?>

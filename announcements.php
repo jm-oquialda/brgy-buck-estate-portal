@@ -32,7 +32,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="empty-state__desc">Check back later for updates from the barangay.</div>
             </div>
         <?php else: ?>
-            <div class="announce-grid">
+            <div class="announce-grid stagger-children">
                 <?php foreach ($announcements as $a): ?>
                 <div class="announce-card">
                     <?php if (!empty($a['image_url'])): ?>
