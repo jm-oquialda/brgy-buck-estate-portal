@@ -14,6 +14,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($id && in_array($action, $allowed)) {
         $stmt = $pdo->prepare("UPDATE document_requests SET status=?, admin_remarks=?, processed_by=?, processed_at=NOW() WHERE id=?");
         $stmt->execute([$action, $remarks, $_SESSION['user_id'], $id]);
+
+        // Notify resident
+        $req = $pdo->prepare("SELECT user_id, doc_type FROM document_requests WHERE id=?");
+        $req->execute([$id]);
+        $reqData = $req->fetch();
+        if ($reqData) {
+            $msgs = [
+                'Approved'   => 'Your ' . $reqData['doc_type'] . ' request has been approved. Please visit the Barangay Hall to claim your document.',
+                'Denied'     => 'Your ' . $reqData['doc_type'] . ' request has been denied.' . ($remarks ? ' Remarks: ' . $remarks : ''),
+                'Processing' => 'Your ' . $reqData['doc_type'] . ' request is now being processed.',
+                'Pending'    => 'Your ' . $reqData['doc_type'] . ' request has been set back to pending.',
+            ];
+            createNotification(
+                $reqData['user_id'],
+                $action === 'Approved' ? 'success' : ($action === 'Denied' ? 'error' : 'info'),
+                'Document Request #' . $id . ' — ' . $action,
+                $msgs[$action] ?? 'Your document request status has been updated.',
+                '/resident/document-request.php?id=' . $id
+            );
+        }
+
         setFlash('success', "Request #$id has been marked as $action.");
     }
     header('Location: /admin/document-requests.php');

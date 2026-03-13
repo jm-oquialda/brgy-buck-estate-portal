@@ -93,3 +93,29 @@ $currentDir  = basename(dirname($_SERVER['PHP_SELF']));
 
 <main class="main-content">
 <?= renderFlash() ?>
+<?php if (isLoggedIn()):
+    $__notifs = getUnreadNotifications($_SESSION['user_id']);
+    if (!empty($__notifs)):
+?>
+<div class="notif-bar" id="notifBar">
+    <div class="container">
+        <?php foreach ($__notifs as $n): ?>
+        <div class="notif-item notif-item--<?= sanitize($n['type']) ?>" data-notif-id="<?= $n['id'] ?>">
+            <div class="notif-item__content">
+                <strong><?= sanitize($n['title']) ?></strong>
+                <span><?= sanitize($n['message']) ?></span>
+                <?php if ($n['link']): ?>
+                    <a href="<?= sanitize($n['link']) ?>" class="notif-item__link">View Details →</a>
+                <?php endif; ?>
+            </div>
+            <button class="notif-item__close" onclick="dismissNotif(<?= $n['id'] ?>, this)" title="Dismiss">&times;</button>
+        </div>
+        <?php endforeach; ?>
+        <?php if (count($__notifs) > 1): ?>
+        <div class="notif-dismiss-all">
+            <button class="btn btn--outline btn--sm" onclick="dismissAllNotifs()">Dismiss All</button>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; endif; ?>

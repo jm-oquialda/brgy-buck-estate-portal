@@ -132,6 +132,32 @@ function timeAgo(string $datetime): string {
     return formatDate($datetime);
 }
 
+// ─── Notifications ──────────────────────────────────────────
+function createNotification(int $userId, string $type, string $title, string $message, string $link = ''): void {
+    $pdo = getDB();
+    $stmt = $pdo->prepare("INSERT INTO notifications (user_id, type, title, message, link) VALUES (?,?,?,?,?)");
+    $stmt->execute([$userId, $type, $title, $message, $link ?: null]);
+}
+
+function getUnreadNotifications(int $userId): array {
+    $pdo = getDB();
+    $stmt = $pdo->prepare("SELECT * FROM notifications WHERE user_id=? AND is_read=0 ORDER BY created_at DESC LIMIT 10");
+    $stmt->execute([$userId]);
+    return $stmt->fetchAll();
+}
+
+function dismissNotification(int $notifId, int $userId): bool {
+    $pdo = getDB();
+    $stmt = $pdo->prepare("UPDATE notifications SET is_read=1 WHERE id=? AND user_id=?");
+    $stmt->execute([$notifId, $userId]);
+    return $stmt->rowCount() > 0;
+}
+
+function dismissAllNotifications(int $userId): void {
+    $pdo = getDB();
+    $pdo->prepare("UPDATE notifications SET is_read=1 WHERE user_id=? AND is_read=0")->execute([$userId]);
+}
+
 // ─── File Uploads ───────────────────────────────────────────
 function handleFileUploads(string $refType, int $refId, int $userId): array {
     $errors = [];
