@@ -55,6 +55,7 @@ require_once __DIR__ . '/includes/header.php';
             <img src="/assets/img/officials-award.jpg"
                  alt="Barangay Buck Estate - 2025 Most Outstanding Barangay Awardees"
                  loading="eager">
+            <div class="hero__photo-caption">2025 Most Outstanding Barangay</div>
         </div>
     </div>
 </section>
@@ -65,12 +66,12 @@ require_once __DIR__ . '/includes/header.php';
         <div class="home-with-sidebar">
             <div>
                 <!-- SERVICES -->
-                <div class="section__header" style="margin-bottom:32px;">
+                <div class="section__header fade-in" style="margin-bottom:32px;">
                     <span class="section__eyebrow">What We Offer</span>
                     <h2 class="section__title">Barangay Services Online</h2>
                     <p class="section__subtitle">Access barangay services anytime, from the comfort of your home.</p>
                 </div>
-                <div class="services-grid">
+                <div class="services-grid stagger-children">
                     <div class="service-card">
                         <div class="service-card__icon">📄</div>
                         <h3 class="service-card__title">Document Requests</h3>
@@ -149,13 +150,16 @@ require_once __DIR__ . '/includes/header.php';
 <?php if (!empty($announcements)): ?>
 <section class="section section--gray">
     <div class="container">
-        <div class="section__header">
+        <div class="section__header fade-in">
             <span class="section__eyebrow">Stay Updated</span>
             <h2 class="section__title">Latest Announcements</h2>
         </div>
-        <div class="announce-grid">
+        <div class="announce-grid stagger-children">
             <?php foreach ($announcements as $ann): ?>
             <div class="announce-card">
+                <?php if (!empty($ann['image_url'])): ?>
+                    <img src="<?= sanitize($ann['image_url']) ?>" alt="<?= sanitize($ann['title']) ?>" class="announce-card__img" loading="lazy">
+                <?php endif; ?>
                 <div class="announce-card__body">
                     <div class="announce-card__date">📅 <?= formatDateTime($ann['created_at']) ?></div>
                     <h3 class="announce-card__title"><?= sanitize($ann['title']) ?></h3>
@@ -180,12 +184,12 @@ require_once __DIR__ . '/includes/header.php';
 <?php if (!empty($officials)): ?>
 <section class="section">
     <div class="container">
-        <div class="section__header">
+        <div class="section__header fade-in">
             <span class="section__eyebrow">Leadership</span>
             <h2 class="section__title">Barangay Officials</h2>
             <p class="section__subtitle">Meet the elected leaders serving Barangay Buck Estate.</p>
         </div>
-        <div class="officials-grid">
+        <div class="officials-grid stagger-children">
             <?php foreach ($officials as $official): ?>
             <div class="official-card">
                 <?php if (!empty($official['photo_url'])): ?>
@@ -208,12 +212,12 @@ require_once __DIR__ . '/includes/header.php';
 <?php if (!empty($skOfficials)): ?>
 <section class="section section--gray">
     <div class="container">
-        <div class="section__header">
+        <div class="section__header fade-in">
             <span class="section__eyebrow">Youth Leadership</span>
             <h2 class="section__title">Sangguniang Kabataan Officials</h2>
             <p class="section__subtitle">The youth council serving Barangay Buck Estate.</p>
         </div>
-        <div class="officials-grid">
+        <div class="officials-grid stagger-children">
             <?php foreach ($skOfficials as $official): ?>
             <div class="official-card">
                 <?php if (!empty($official['photo_url'])): ?>

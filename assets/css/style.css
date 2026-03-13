@@ -368,19 +368,136 @@ select.form-control { cursor: pointer; background-image: url("data:image/svg+xml
 }
 .hero__photo {
     flex-shrink: 0;
-    max-width: 420px;
-    border-radius: var(--radius-lg);
+    max-width: 400px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    border: 3px solid rgba(255,255,255,.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.1);
+    border: 4px solid rgba(255,255,255,.2);
+    transform: rotate(1.5deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+}
+.hero__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(200,52,107,0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+.hero__photo:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 24px 70px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.15);
 }
 .hero__photo img {
     width: 100%;
     height: auto;
     display: block;
 }
+.hero__photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(27,42,107,0.9));
+    color: #fff;
+    padding: 24px 16px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    text-align: center;
+    letter-spacing: 0.5px;
+}
 @media (max-width: 1024px) {
     .hero__photo { display: none; }
+}
+
+/* ── Scroll Animations ───────────────────────── */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+.scale-in {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger children */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.2s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.3s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.4s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 0.5s; }
+.stagger-children.visible > *:nth-child(7) { transition-delay: 0.6s; }
+.stagger-children.visible > *:nth-child(8) { transition-delay: 0.7s; }
+.stagger-children.visible > *:nth-child(9) { transition-delay: 0.8s; }
+.stagger-children.visible > *:nth-child(10) { transition-delay: 0.9s; }
+.stagger-children.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Announcement Card with Image ────────────── */
+.announce-card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+.announce-card {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.announce-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+.announce-card__body {
+    flex: 1;
+}
+
+/* Announcement detail image */
+.announce-detail__img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
 }
 
 /* ── About Page Banner Image ─────────────────── */

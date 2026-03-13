@@ -80,4 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ── Scroll Reveal Animations ────────────────────────────────
+    const animatedEls = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children');
+    if (animatedEls.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        animatedEls.forEach(el => observer.observe(el));
+    }
+
+    // ── Smooth parallax for hero section ────────────────────────
+    const heroPhoto = document.querySelector('.hero__photo');
+    if (heroPhoto) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (scrolled < 600) {
+                heroPhoto.style.transform = `rotate(${1.5 - scrolled * 0.003}deg) translateY(${scrolled * 0.08}px)`;
+            }
+        }, { passive: true });
+    }
+
 });

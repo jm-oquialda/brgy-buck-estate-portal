@@ -35,6 +35,9 @@ require_once __DIR__ . '/includes/header.php';
             <div class="announce-grid">
                 <?php foreach ($announcements as $a): ?>
                 <div class="announce-card">
+                    <?php if (!empty($a['image_url'])): ?>
+                        <img src="<?= sanitize($a['image_url']) ?>" alt="<?= sanitize($a['title']) ?>" class="announce-card__img" loading="lazy">
+                    <?php endif; ?>
                     <div class="announce-card__body">
                         <div class="announce-card__date">📅 <?= formatDate($a['created_at'], 'F j, Y') ?></div>
                         <h3 class="announce-card__title"><?= sanitize($a['title']) ?></h3>
