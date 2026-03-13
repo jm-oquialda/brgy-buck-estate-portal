@@ -1,24 +1,26 @@
-# 🏛 Barangay Buck Estate – Online Portal
+# Barangay Buck Estate – Online Portal
 
 A modern web portal for **Barangay Buck Estate, Alfonso, Cavite** built with **PHP + MySQL**.
 
 ---
 
-## 📋 Features
+## Features
 
 | Module | Residents | Admin |
 |--------|-----------|-------|
 | Register / Login | ✅ | ✅ |
 | Announcements | View | Post / Edit / Delete |
 | Document Requests | Submit / Track | Approve / Deny / Remarks |
-| Blotter Reports | File / Track | Review / Assign Case No. |
-| Financial Assistance | Apply / Track | Approve / Deny |
+| Blotter Reports | File / Track / Upload Evidence | Review / Assign Case No. |
+| Financial Assistance | Apply / Track / Upload Documents | Approve / Deny |
+| In-App Notifications | Receive status updates | Auto-sent on action |
+| File Attachments | Upload supporting files | View resident uploads |
 | Profile | Edit info / Change password | — |
 | Resident Management | — | View / Activate / Deactivate |
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Backend:** PHP 8.1+
 - **Database:** MySQL (InfinityFree hosting)
@@ -28,7 +30,7 @@ A modern web portal for **Barangay Buck Estate, Alfonso, Cavite** built with **P
 
 ---
 
-## ⚡ Setup Instructions
+## Setup Instructions
 
 ### 1. Create MySQL Database on InfinityFree
 
@@ -70,7 +72,6 @@ The workflow file (`.github/workflows/deploy.yml`) is already configured.
 1. Use an FTP client (FileZilla, WinSCP, etc.)
 2. Connect to your InfinityFree FTP
 3. Upload all files to `/htdocs/` directory
-4. Done!
 
 ### 4. Default Admin Login
 
@@ -79,11 +80,28 @@ The workflow file (`.github/workflows/deploy.yml`) is already configured.
 | Email | `admin@buckestate.gov.ph` |
 | Password | `password` |
 
-> 🔴 **Change this immediately after first login** via the Admin panel or directly in the database.
+> **Change this immediately after first login** via the Admin panel or directly in the database.
 
 ---
 
-## 📁 File Structure
+## Database Tables
+
+| Table | Purpose |
+|-------|---------|
+| `users` | Registered residents and admin accounts |
+| `announcements` | Barangay news, notices, and updates |
+| `document_requests` | Barangay Clearance, Certificate of Residency/Indigency requests |
+| `blotter_reports` | Incident/blotter reports filed by residents |
+| `financial_requests` | Medical, Burial, Calamity, and other financial assistance applications |
+| `notifications` | In-app notification banners for residents (status updates from admin) |
+| `attachments` | File uploads (evidence, receipts, documents) for blotter and financial requests |
+| `officials` | Elected barangay and SK officials displayed on the portal |
+
+All tables are created with proper foreign keys and constraints.
+
+---
+
+## File Structure
 
 ```
 buck-estate-portal/
@@ -102,9 +120,9 @@ buck-estate-portal/
 │   ├── dashboard.php            ← Resident dashboard (3-tab)
 │   ├── document-request-new.php ← Submit document request
 │   ├── document-request.php     ← View single request
-│   ├── blotter-new.php          ← File blotter report
+│   ├── blotter-new.php          ← File blotter report + upload evidence
 │   ├── blotter.php              ← View single blotter
-│   ├── financial-new.php        ← Apply for financial assistance
+│   ├── financial-new.php        ← Apply for financial assistance + upload docs
 │   ├── financial.php            ← View single application
 │   └── profile.php              ← Edit profile + change password
 │
@@ -116,19 +134,27 @@ buck-estate-portal/
 │   ├── financial.php            ← Manage financial assistance
 │   └── residents.php            ← Manage registered residents
 │
+├── api/
+│   └── dismiss-notification.php ← AJAX endpoint for dismissing notifications
+│
 ├── includes/
-│   ├── header.php               ← Navigation + HTML head
+│   ├── header.php               ← Navigation + notification banners + HTML head
 │   ├── footer.php               ← Footer + scripts
 │   ├── db.php                   ← PDO database connection
-│   └── functions.php            ← Auth, flash, CSRF, helpers
+│   └── functions.php            ← Auth, flash, CSRF, uploads, notifications, helpers
 │
 ├── config/
-│   └── config.php               ← ⚙ Site + DB configuration
+│   └── config.php               ← Site + DB configuration
+│
+├── uploads/                     ← User-uploaded files (blotter evidence, financial docs)
+│   ├── .htaccess                ← Blocks PHP execution for security
+│   ├── blotter/                 ← Blotter report attachments
+│   └── financial/               ← Financial assistance attachments
 │
 ├── assets/
 │   ├── css/style.css            ← Main stylesheet
-│   ├── js/main.js               ← Navigation, tabs, confirm dialogs
-│   └── img/                     ← Images and logos
+│   ├── js/main.js               ← Navigation, tabs, animations, notifications
+│   └── img/                     ← Site images (officials, landmarks, announcements)
 │
 ├── sql/
 │   └── schema.sql               ← Run this in InfinityFree phpMyAdmin
@@ -139,7 +165,7 @@ buck-estate-portal/
 
 ---
 
-## 🎨 Branding
+## Branding
 
 | Token | Value |
 |-------|-------|
@@ -152,29 +178,38 @@ To change the color palette, edit the CSS variables at the top of `assets/css/st
 
 ---
 
-## 🔖 Replacing Placeholder Data
+## Configuration
 
-After setup, update the following in `config/config.php`:
-- `SITE_CONTACT` – actual barangay hall contact number
-- `SITE_EMAIL` – official email address
+Update the following in `config/config.php`:
 
-Update officials in MySQL's `officials` table — replace all `[Placeholder]` names with the actual names and positions of elected officials.
+| Constant | Description |
+|----------|-------------|
+| `SITE_CONTACT` | Barangay hotline number |
+| `SITE_EMAIL` | Official email address |
+| `SITE_FB_OFFICIAL` | Official Facebook page URL |
+| `SITE_FB_COMMUNITY` | Community Facebook group URL |
+| `SITE_FB_SK` | SK Facebook page URL |
+
+Officials are managed in the `officials` table via phpMyAdmin. Photos go in `assets/img/officials/`.
 
 Drop your official logo as `assets/img/logo.svg` or `logo.png` (recommended: 200×200px, transparent background).
 
 ---
 
-## 🔐 Security Notes
+## Security Notes
 
 - All forms use **CSRF tokens**
 - Passwords are hashed with **bcrypt** (`PASSWORD_BCRYPT`)
 - All output is escaped with `htmlspecialchars`
 - PDO uses **prepared statements** throughout — no raw SQL concatenation
 - MySQL connection uses standard PDO security best practices
+- Uploads directory blocks **PHP execution** via `.htaccess`
+- File uploads are validated by **extension and size** (5MB limit, images + documents only)
+- Notification dismiss API verifies **user ownership** before marking as read
 
 ---
 
-## 🌐 Enable HTTPS (Recommended)
+## Enable HTTPS (Recommended)
 
 InfinityFree provides **FREE SSL certificates**:
 
@@ -191,20 +226,9 @@ RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 ```
 
-See `HTTPS_SETUP_GUIDE.md` for detailed instructions.
-
 ---
 
-## 📌 Notes for Developers
-
-- The `admin` role is assigned directly in the database. To promote a resident to admin, update `role='admin'` in the `users` table.
-- The contact form does NOT send emails by default. Configure SMTP or a mail service in `contact.php` to enable email functionality.
-- For production, consider adding **rate limiting** to the login form.
-- InfinityFree has some limitations (like execution time limits) - keep this in mind for heavy operations.
-
----
-
-## 🚀 GitHub Actions Auto-Deployment
+## GitHub Actions Auto-Deployment
 
 The repository includes a GitHub Actions workflow that automatically deploys to InfinityFree via FTP whenever you push to the `main` branch.
 
@@ -222,41 +246,28 @@ git commit -m "Update site"
 git push origin main
 ```
 
-The workflow will automatically:
-- Check out your code
-- Deploy all files to `/htdocs/` via FTP
-- Your site is live! 🎉
+The workflow will automatically deploy all files to `/htdocs/` via FTP.
 
 **Note:** Database changes must be done manually in InfinityFree's phpMyAdmin.
 
 ---
 
-## 📊 Database Schema
+## Notes for the Developer
 
-The MySQL schema includes:
-- `users` - Resident and admin accounts
-- `announcements` - Barangay announcements
-- `document_requests` - Document request tracking
-- `blotter_reports` - Incident reports
-- `financial_requests` - Financial assistance applications
-- `officials` - Barangay and SK officials
-
-All tables are created with proper foreign keys and constraints.
+- The `admin` role is assigned directly in the database. To promote a resident to admin, update `role='admin'` in the `users` table.
+- The contact form does NOT send emails by default. Configure SMTP or a mail service in `contact.php` to enable email functionality.
+- For production, consider adding **rate limiting** to the login form.
+- Uploaded files are stored in `uploads/{type}/{request_id}/` and referenced in the `attachments` table.
+- InfinityFree has some limitations (like execution time limits) — keep this in mind for heavy operations.
 
 ---
 
-## 🎓 Project Information
+## Project Information
 
-**Course:** ITS122L – Web Systems and Technologies 2  
-**Institution:** Mapua University  
+**Course:** ITS122L – Web Systems and Technologies 2
+**Institution:** Mapua University
 **Student:** Oquialda, Margaret
 
 ---
 
-## 📝 License
-
-This project is for educational purposes.
-
----
-
-*Built with ❤️ for Barangay Buck Estate, Alfonso, Cavite*
+*Built for Barangay Buck Estate, Alfonso, Cavite*
