@@ -28,9 +28,17 @@ require_once __DIR__ . '/includes/header.php';
                 <p style="font-size:15px; line-height:1.9; color:var(--text); margin-bottom:16px;">
                     The barangay is known for its cool climate, lush landscapes, and proximity to popular destinations such as Sonya's Garden and the Royale Tagaytay Estates. According to the 2020 Census, Buck Estate has a population of approximately 3,638 residents, representing 6.13% of Alfonso's total population.
                 </p>
-                <p style="font-size:15px; line-height:1.9; color:var(--text);">
+                <p style="font-size:15px; line-height:1.9; color:var(--text); margin-bottom:24px;">
                     The Barangay Hall serves as the center of governance, providing essential services to all residents in the community. Through this portal, the barangay aims to make public services more accessible, transparent, and efficient for every resident.
                 </p>
+                
+                <!-- BARANGAY HALL PHOTO -->
+                <div class="about-banner" style="margin-top:24px;">
+                    <img src="/assets/img/barangay-hall.jpg"
+                         alt="Multi-Purpose Hall, Barangay Buck Estate, Alfonso, Cavite"
+                         loading="lazy"
+                         style="width:100%; height:auto; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+                </div>
             </div>
             <div>
                 <div class="card">
@@ -74,18 +82,6 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- BARANGAY HALL PHOTO -->
-<section class="section section--gray" style="padding-top:0;">
-    <div class="container">
-        <div class="about-banner">
-            <img src="/assets/img/barangay-hall.jpg"
-                 alt="Multi-Purpose Hall, Barangay Buck Estate, Alfonso, Cavite"
-                 loading="lazy"
-                 style="width:100%; height:auto; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
         </div>
     </div>
 </section>
