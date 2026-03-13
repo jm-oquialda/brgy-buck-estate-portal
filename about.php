@@ -122,7 +122,9 @@ require_once __DIR__ . '/includes/header.php';
         </div>
         <div class="landmark-grid">
             <div class="landmark-card">
-                <div style="background:var(--accent-light); padding:24px; text-align:center; font-size:48px;">🌿</div>
+                <img src="/assets/img/landmark-sonyas-garden.jpg"
+                     alt="Sonya's Garden, Buck Estate, Alfonso, Cavite"
+                     class="landmark-card__img" loading="lazy">
                 <div class="landmark-card__body">
                     <span class="landmark-card__tag">Dining &amp; Tourism</span>
                     <div class="landmark-card__title">Sonya's Garden</div>
@@ -130,19 +132,23 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
             <div class="landmark-card">
-                <div style="background:var(--accent-light); padding:24px; text-align:center; font-size:48px;">🏘</div>
+                <img src="/assets/img/landmark-buck-estate-elementary.jpg"
+                     alt="Buck Estate Elementary School, Alfonso, Cavite"
+                     class="landmark-card__img" loading="lazy">
                 <div class="landmark-card__body">
-                    <span class="landmark-card__tag">Residential Community</span>
-                    <div class="landmark-card__title">Royale Tagaytay Estates</div>
-                    <p class="landmark-card__desc">A European-themed residential development by Sta. Lucia Land along Km. 69 Emilio Aguinaldo Highway. Features a country club, 9-hole golf course, function rooms, swimming pool, and beautifully landscaped grounds.</p>
+                    <span class="landmark-card__tag">Education</span>
+                    <div class="landmark-card__title">Buck Estate Elementary School</div>
+                    <p class="landmark-card__desc">A public elementary school serving the young learners of Barangay Buck Estate and nearby communities, providing quality basic education and nurturing the next generation of leaders.</p>
                 </div>
             </div>
             <div class="landmark-card">
-                <div style="background:var(--accent-light); padding:24px; text-align:center; font-size:48px;">🏔</div>
+                <img src="/assets/img/landmark-buck-estate-nhs.jpg"
+                     alt="Buck Estate National High School, Alfonso, Cavite"
+                     class="landmark-card__img" loading="lazy">
                 <div class="landmark-card__body">
-                    <span class="landmark-card__tag">Nature &amp; Scenery</span>
-                    <div class="landmark-card__title">Cool Highland Landscape</div>
-                    <p class="landmark-card__desc">At an elevated highland location, Buck Estate enjoys a naturally cool climate and breathtaking views of Cavite's rolling hills and greenery — a refreshing escape from the heat of Metro Manila.</p>
+                    <span class="landmark-card__tag">Education</span>
+                    <div class="landmark-card__title">Buck Estate National High School</div>
+                    <p class="landmark-card__desc">A public secondary school in the heart of the barangay, offering quality junior and senior high school education to the youth of Buck Estate and surrounding communities in Alfonso, Cavite.</p>
                 </div>
             </div>
         </div>
