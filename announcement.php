@@ -27,6 +27,9 @@ require_once __DIR__ . '/includes/header.php';
                 <span>📅 <?= formatDateTime($ann['created_at']) ?></span>
                 <span>✍️ <?= sanitize($ann['fname'] . ' ' . $ann['lname']) ?></span>
             </div>
+            <?php if (!empty($ann['image_url'])): ?>
+                <img src="<?= sanitize($ann['image_url']) ?>" alt="<?= sanitize($ann['title']) ?>" class="announce-detail__img" loading="lazy">
+            <?php endif; ?>
             <div class="announce-detail__content"><?= nl2br(sanitize($ann['content'])) ?></div>
         </div>
         <div class="mt-3">

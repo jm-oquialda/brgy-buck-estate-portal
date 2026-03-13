@@ -88,7 +88,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- MISSION VISION -->
 <section class="section section--gray">
     <div class="container">
-        <div class="grid-2">
+        <div class="grid-2 stagger-children">
             <div class="card" style="border-top:4px solid var(--primary);">
                 <div class="card__body" style="padding:32px;">
                     <div style="font-size:32px; margin-bottom:12px;">🎯</div>
@@ -120,7 +120,7 @@ require_once __DIR__ . '/includes/header.php';
             <h2 class="section__title">Landmarks in Barangay Buck Estate</h2>
             <p class="section__subtitle">Discover what makes Buck Estate a vibrant and well-known barangay in Alfonso, Cavite.</p>
         </div>
-        <div class="landmark-grid">
+        <div class="landmark-grid stagger-children">
             <div class="landmark-card">
                 <img src="/assets/img/landmark-sonyas-garden.jpg"
                      alt="Sonya's Garden, Buck Estate, Alfonso, Cavite"
