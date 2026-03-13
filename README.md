@@ -1,6 +1,6 @@
 # 🏛 Barangay Buck Estate – Online Portal
 
-A formal and modern web portal for **Barangay Buck Estate, Alfonso, Cavite** built with **PHP + Supabase (PostgreSQL)**.
+A modern web portal for **Barangay Buck Estate, Alfonso, Cavite** built with **PHP + MySQL**.
 
 ---
 
@@ -21,47 +21,56 @@ A formal and modern web portal for **Barangay Buck Estate, Alfonso, Cavite** bui
 ## 🛠 Tech Stack
 
 - **Backend:** PHP 8.1+
-- **Database:** Supabase (PostgreSQL via PDO)
+- **Database:** MySQL (InfinityFree hosting)
 - **Frontend:** Vanilla CSS + JS (no frameworks)
 - **Fonts:** Google Fonts – Poppins + Inter
+- **Deployment:** GitHub Actions → FTP → InfinityFree
 
 ---
 
 ## ⚡ Setup Instructions
 
-### 1. Create Supabase Project
+### 1. Create MySQL Database on InfinityFree
 
-1. Go to [supabase.com](https://supabase.com) and create a free project.
-2. In the Supabase dashboard, go to **SQL Editor**.
-3. Open the file `sql/schema.sql` and run the entire contents.
-4. This creates all tables and seeds the default admin account + sample data.
+1. Log into your InfinityFree account
+2. Go to **MySQL Databases** in the control panel
+3. Create a new database (note down the credentials)
+4. In **phpMyAdmin**, import the `sql/schema.sql` file
+   - This creates all tables and seeds the default admin account + sample data
 
 ### 2. Configure Database Connection
 
-Open `config/config.php` and fill in:
+Open `config/config.php` and fill in your InfinityFree MySQL credentials:
 
 ```php
-define('DB_HOST', 'db.YOUR_PROJECT_REF.supabase.co');
-define('DB_PASS', 'YOUR_DATABASE_PASSWORD');
+define('DB_HOST', 'sql101.infinityfree.com');  // Your MySQL host
+define('DB_NAME', 'if0_XXXXXXXX_buckestate');  // Your database name
+define('DB_USER', 'if0_XXXXXXXX');             // Your database username
+define('DB_PASS', 'your_password_here');       // Your database password
 ```
 
-You can find these in **Supabase → Project Settings → Database → Connection string (PHP/PDO)**.
+You can find these credentials in **InfinityFree Control Panel → MySQL Databases**.
 
-> ⚠️ **Important:** Make sure SSL mode is `require` — the connection already has this configured.
+### 3. Deploy to InfinityFree
 
-### 3. Deploy to Hosting
+#### Option A: GitHub Actions (Recommended - Automatic Deployment)
 
-You can deploy to any PHP 8.1+ host (e.g., **InfinityFree**, **Hostinger**, **Railway**, **000webhost**).
+1. **Set up GitHub Secrets** in your repository settings:
+   - `FTP_HOSTNAME` - Your InfinityFree FTP hostname
+   - `FTP_USERNAME` - Your FTP username
+   - `FTP_PASSWORD` - Your FTP password
+   - `FTP_PORT` - FTP port (usually `21`)
 
-- Upload all files to your `public_html` or `www` root.
-- Make sure the host supports **PHP 8.1+** and the **PDO PostgreSQL** extension (`pdo_pgsql`).
+2. **Push to main branch** - GitHub Actions will automatically deploy via FTP!
 
-#### To check if pdo_pgsql is available:
-Create a file called `phpinfo.php` with:
-```php
-<?php phpinfo(); ?>
-```
-Search for `pdo_pgsql` in the output. If missing, contact your hosting provider.
+The workflow file (`.github/workflows/deploy.yml`) is already configured.
+
+#### Option B: Manual FTP Upload
+
+1. Use an FTP client (FileZilla, WinSCP, etc.)
+2. Connect to your InfinityFree FTP
+3. Upload all files to `/htdocs/` directory
+4. Done!
 
 ### 4. Default Admin Login
 
@@ -70,7 +79,7 @@ Search for `pdo_pgsql` in the output. If missing, contact your hosting provider.
 | Email | `admin@buckestate.gov.ph` |
 | Password | `password` |
 
-> 🔴 **Change this immediately after first login** via the Admin panel or directly in Supabase.
+> 🔴 **Change this immediately after first login** via the Admin panel or directly in the database.
 
 ---
 
@@ -82,7 +91,7 @@ buck-estate-portal/
 ├── about.php                    ← About the barangay
 ├── announcements.php            ← All announcements
 ├── announcement.php             ← Single announcement view
-├── contact.php                  ← Contact form
+├── contact.php                  ← Contact form + Emergency hotlines
 │
 ├── auth/
 │   ├── login.php                ← Login
@@ -119,10 +128,13 @@ buck-estate-portal/
 ├── assets/
 │   ├── css/style.css            ← Main stylesheet
 │   ├── js/main.js               ← Navigation, tabs, confirm dialogs
-│   └── img/logo.png             ← ← REPLACE with actual logo
+│   └── img/                     ← Images and logos
 │
-└── sql/
-    └── schema.sql               ← Run this in Supabase SQL Editor
+├── sql/
+│   └── schema.sql               ← Run this in InfinityFree phpMyAdmin
+│
+└── .github/workflows/
+    └── deploy.yml               ← GitHub Actions FTP deployment
 ```
 
 ---
@@ -146,9 +158,9 @@ After setup, update the following in `config/config.php`:
 - `SITE_CONTACT` – actual barangay hall contact number
 - `SITE_EMAIL` – official email address
 
-Update officials in Supabase's `officials` table — replace all `[Placeholder]` names with the actual names and positions of elected officials.
+Update officials in MySQL's `officials` table — replace all `[Placeholder]` names with the actual names and positions of elected officials.
 
-Drop your official logo as `assets/img/logo.png` (recommended: 200×200px, PNG with transparent background).
+Drop your official logo as `assets/img/logo.svg` or `logo.png` (recommended: 200×200px, transparent background).
 
 ---
 
@@ -158,17 +170,93 @@ Drop your official logo as `assets/img/logo.png` (recommended: 200×200px, PNG w
 - Passwords are hashed with **bcrypt** (`PASSWORD_BCRYPT`)
 - All output is escaped with `htmlspecialchars`
 - PDO uses **prepared statements** throughout — no raw SQL concatenation
-- Supabase connection enforces **SSL (sslmode=require)**
+- MySQL connection uses standard PDO security best practices
 
 ---
 
-## 📌 Notes for the Developer
+## 🌐 Enable HTTPS (Recommended)
 
-- The `admin` role is assigned directly in the database. To promote a resident to admin, update `role='admin'` in the `users` table via Supabase.
-- The contact form does NOT send emails by default. Uncomment and configure the `mail()` call in `contact.php` after setting up SMTP.
+InfinityFree provides **FREE SSL certificates**:
+
+1. Log into InfinityFree control panel
+2. Go to **SSL Certificates**
+3. Install **GoGetSSL** (free option)
+4. Wait for activation (up to 72 hours)
+5. Add HTTPS redirect to `.htaccess`:
+
+```apache
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+```
+
+See `HTTPS_SETUP_GUIDE.md` for detailed instructions.
+
+---
+
+## 📌 Notes for Developers
+
+- The `admin` role is assigned directly in the database. To promote a resident to admin, update `role='admin'` in the `users` table.
+- The contact form does NOT send emails by default. Configure SMTP or a mail service in `contact.php` to enable email functionality.
 - For production, consider adding **rate limiting** to the login form.
+- InfinityFree has some limitations (like execution time limits) - keep this in mind for heavy operations.
 
 ---
 
-*Built for ITS122L – Web Systems and Technologies 2 | Mapua University*  
-*Student: Oquialda, Margaret*
+## 🚀 GitHub Actions Auto-Deployment
+
+The repository includes a GitHub Actions workflow that automatically deploys to InfinityFree via FTP whenever you push to the `main` branch.
+
+**Setup:**
+1. Add GitHub Secrets (Settings → Secrets → Actions):
+   - `FTP_HOSTNAME`
+   - `FTP_USERNAME`
+   - `FTP_PASSWORD`
+   - `FTP_PORT`
+
+2. Push to main branch:
+```bash
+git add .
+git commit -m "Update site"
+git push origin main
+```
+
+The workflow will automatically:
+- Check out your code
+- Deploy all files to `/htdocs/` via FTP
+- Your site is live! 🎉
+
+**Note:** Database changes must be done manually in InfinityFree's phpMyAdmin.
+
+---
+
+## 📊 Database Schema
+
+The MySQL schema includes:
+- `users` - Resident and admin accounts
+- `announcements` - Barangay announcements
+- `document_requests` - Document request tracking
+- `blotter_reports` - Incident reports
+- `financial_requests` - Financial assistance applications
+- `officials` - Barangay and SK officials
+
+All tables are created with proper foreign keys and constraints.
+
+---
+
+## 🎓 Project Information
+
+**Course:** ITS122L – Web Systems and Technologies 2  
+**Institution:** Mapua University  
+**Student:** Oquialda, Margaret
+
+---
+
+## 📝 License
+
+This project is for educational purposes.
+
+---
+
+*Built with ❤️ for Barangay Buck Estate, Alfonso, Cavite*
