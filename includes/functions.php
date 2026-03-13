@@ -132,6 +132,93 @@ function timeAgo(string $datetime): string {
     return formatDate($datetime);
 }
 
+// ─── File Uploads ───────────────────────────────────────────
+function handleFileUploads(string $refType, int $refId, int $userId): array {
+    $errors = [];
+    if (empty($_FILES['attachments']['name'][0])) return $errors;
+
+    $uploadDir = __DIR__ . '/../uploads/' . $refType . '/' . $refId;
+    $maxSize   = 5 * 1024 * 1024; // 5MB
+    $allowed   = ['jpg','jpeg','png','gif','pdf','doc','docx'];
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    $pdo = getDB();
+    $stmt = $pdo->prepare("INSERT INTO attachments (ref_type, ref_id, file_name, file_path, file_size, uploaded_by) VALUES (?,?,?,?,?,?)");
+
+    foreach ($_FILES['attachments']['name'] as $i => $name) {
+        if ($_FILES['attachments']['error'][$i] !== UPLOAD_ERR_OK) continue;
+        if (empty($name)) continue;
+
+        $size = $_FILES['attachments']['size'][$i];
+        $tmp  = $_FILES['attachments']['tmp_name'][$i];
+        $ext  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+
+        if (!in_array($ext, $allowed)) {
+            $errors[] = sanitize($name) . ': File type not allowed.';
+            continue;
+        }
+        if ($size > $maxSize) {
+            $errors[] = sanitize($name) . ': File exceeds 5MB limit.';
+            continue;
+        }
+
+        $safeName = time() . '_' . $i . '.' . $ext;
+        $dest     = $uploadDir . '/' . $safeName;
+        $webPath  = '/uploads/' . $refType . '/' . $refId . '/' . $safeName;
+
+        if (move_uploaded_file($tmp, $dest)) {
+            $stmt->execute([$refType, $refId, $name, $webPath, $size, $userId]);
+        } else {
+            $errors[] = sanitize($name) . ': Upload failed.';
+        }
+    }
+    return $errors;
+}
+
+function getAttachments(string $refType, int $refId): array {
+    $pdo = getDB();
+    $stmt = $pdo->prepare("SELECT * FROM attachments WHERE ref_type=? AND ref_id=? ORDER BY uploaded_at ASC");
+    $stmt->execute([$refType, $refId]);
+    return $stmt->fetchAll();
+}
+
+function formatFileSize(int $bytes): string {
+    if ($bytes >= 1048576) return round($bytes / 1048576, 1) . ' MB';
+    if ($bytes >= 1024) return round($bytes / 1024, 1) . ' KB';
+    return $bytes . ' B';
+}
+
+function isImageFile(string $path): bool {
+    $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+    return in_array($ext, ['jpg','jpeg','png','gif']);
+}
+
+function renderAttachments(array $attachments): string {
+    if (empty($attachments)) return '';
+    $html = '<div class="attachments"><span class="form-label">Attachments (' . count($attachments) . ')</span><div class="attachment-list">';
+    foreach ($attachments as $a) {
+        $name = sanitize($a['file_name']);
+        $path = sanitize($a['file_path']);
+        $size = formatFileSize($a['file_size']);
+        if (isImageFile($a['file_path'])) {
+            $html .= '<a href="' . $path . '" target="_blank" class="attachment-item attachment-item--image">';
+            $html .= '<img src="' . $path . '" alt="' . $name . '" loading="lazy">';
+            $html .= '<span class="attachment-item__name">' . $name . '</span>';
+            $html .= '<span class="attachment-item__size">' . $size . '</span></a>';
+        } else {
+            $html .= '<a href="' . $path . '" target="_blank" class="attachment-item">';
+            $html .= '<span class="attachment-item__icon">📎</span>';
+            $html .= '<span class="attachment-item__name">' . $name . '</span>';
+            $html .= '<span class="attachment-item__size">' . $size . '</span></a>';
+        }
+    }
+    $html .= '</div></div>';
+    return $html;
+}
+
 // ─── Status badge ────────────────────────────────────────────
 function statusBadge(string $status): string {
     $map = [

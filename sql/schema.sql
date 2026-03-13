@@ -80,6 +80,19 @@ CREATE TABLE IF NOT EXISTS `financial_requests` (
     FOREIGN KEY (`processed_by`) REFERENCES `users`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `attachments` (
+    `id`          INT AUTO_INCREMENT PRIMARY KEY,
+    `ref_type`    ENUM('blotter','financial') NOT NULL,
+    `ref_id`      INT NOT NULL,
+    `file_name`   VARCHAR(255) NOT NULL,
+    `file_path`   VARCHAR(500) NOT NULL,
+    `file_size`   INT NOT NULL DEFAULT 0,
+    `uploaded_by` INT NOT NULL,
+    `uploaded_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`uploaded_by`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+    INDEX (`ref_type`, `ref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `officials` (
     `id`        INT AUTO_INCREMENT PRIMARY KEY,
     `name`      VARCHAR(200) NOT NULL,

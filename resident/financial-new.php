@@ -30,7 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user['id'], $vals['assistance_type'], $vals['description'],
             $vals['amount_requested'], $vals['supporting_details'],
         ]);
-        setFlash('success', 'Financial assistance application submitted. The barangay will review your application.');
+        $reqId = (int)$pdo->lastInsertId();
+
+        // Handle file uploads
+        $uploadErrors = handleFileUploads('financial', $reqId, $user['id']);
+
+        $msg = 'Financial assistance application submitted. The barangay will review your application.';
+        if (!empty($uploadErrors)) {
+            $msg .= ' Some files could not be uploaded: ' . implode(' ', $uploadErrors);
+        }
+        setFlash('success', $msg);
         header('Location: /resident/dashboard.php');
         exit;
     }
@@ -53,7 +62,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <div class="card">
                     <div class="card__header"><h2 class="card__title">Application Form</h2></div>
                     <div class="card__body">
-                        <form method="POST" novalidate>
+                        <form method="POST" enctype="multipart/form-data" novalidate>
                             <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
 
                             <div class="form-group">
@@ -88,6 +97,12 @@ require_once __DIR__ . '/../includes/header.php';
                                 <textarea name="supporting_details" class="form-control"
                                           placeholder="Hospital name, patient name, case number, or any supporting information..."
                                           maxlength="1000"><?= sanitize($_POST['supporting_details'] ?? '') ?></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Supporting Documents <span style="color:var(--text-muted);font-weight:400;">(Optional)</span></label>
+                                <input type="file" name="attachments[]" class="form-control" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx">
+                                <div class="form-note">Upload receipts, hospital bills, or other supporting documents. Max 5MB per file. Accepted: JPG, PNG, GIF, PDF, DOC, DOCX.</div>
                             </div>
 
                             <div class="info-box">📅 Date of filing will be automatically recorded upon submission.</div>
