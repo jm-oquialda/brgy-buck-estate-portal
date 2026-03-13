@@ -37,6 +37,9 @@ require_once __DIR__ . '/../includes/header.php';
                 <div style="grid-column:1/-1"><span class="form-label">Location</span><p><?= sanitize($req['incident_location']) ?></p></div>
                 <div style="grid-column:1/-1"><span class="form-label">Narrative Description</span><p style="white-space:pre-wrap;"><?= sanitize($req['description']) ?></p></div>
                 <div><span class="form-label">Date Filed</span><p><?= formatDateTime($req['filed_at']) ?></p></div>
+                <?php $attachments = getAttachments('blotter', $req['id']); if (!empty($attachments)): ?>
+                <div style="grid-column:1/-1"><?= renderAttachments($attachments) ?></div>
+                <?php endif; ?>
                 <?php if ($req['admin_remarks']): ?>
                 <div style="grid-column:1/-1">
                     <span class="form-label">Barangay Remarks</span>

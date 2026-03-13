@@ -39,6 +39,9 @@ require_once __DIR__ . '/../includes/header.php';
                 <?php if ($req['supporting_details']): ?>
                 <div style="grid-column:1/-1"><span class="form-label">Supporting Details</span><p><?= sanitize($req['supporting_details']) ?></p></div>
                 <?php endif; ?>
+                <?php $attachments = getAttachments('financial', $req['id']); if (!empty($attachments)): ?>
+                <div style="grid-column:1/-1"><?= renderAttachments($attachments) ?></div>
+                <?php endif; ?>
                 <?php if ($req['admin_remarks']): ?>
                 <div style="grid-column:1/-1">
                     <span class="form-label">Barangay Remarks</span>

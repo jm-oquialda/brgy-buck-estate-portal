@@ -33,7 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $vals['respondent_name'], $vals['incident_date'],
             $vals['incident_location'], $vals['description'],
         ]);
-        setFlash('success', 'Blotter report filed successfully. The barangay will review your report.');
+        $reportId = (int)$pdo->lastInsertId();
+
+        // Handle file uploads
+        $uploadErrors = handleFileUploads('blotter', $reportId, $user['id']);
+
+        $msg = 'Blotter report filed successfully. The barangay will review your report.';
+        if (!empty($uploadErrors)) {
+            $msg .= ' Some files could not be uploaded: ' . implode(' ', $uploadErrors);
+        }
+        setFlash('success', $msg);
         header('Location: /resident/dashboard.php');
         exit;
     }
@@ -58,7 +67,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <div class="card__body">
                         <div class="warning-box">⚠ Filing a false blotter report is a punishable offense under Philippine law. Please ensure all information is accurate.</div>
 
-                        <form method="POST" novalidate>
+                        <form method="POST" enctype="multipart/form-data" novalidate>
                             <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
 
                             <div class="form-group">
@@ -107,6 +116,12 @@ require_once __DIR__ . '/../includes/header.php';
                                           placeholder="Describe the incident in detail. Include what happened, how it started, and any witnesses..."
                                           maxlength="2000"><?= sanitize($_POST['description'] ?? '') ?></textarea>
                                 <?php if (isset($errors['description'])): ?><div class="form-error">⚠ <?= $errors['description'] ?></div><?php endif; ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Evidence / Photos <span style="color:var(--text-muted);font-weight:400;">(Optional)</span></label>
+                                <input type="file" name="attachments[]" class="form-control" multiple accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx">
+                                <div class="form-note">Upload photos, screenshots, or documents as evidence. Max 5MB per file. Accepted: JPG, PNG, GIF, PDF, DOC, DOCX.</div>
                             </div>
 
                             <div style="display:flex; gap:10px;">

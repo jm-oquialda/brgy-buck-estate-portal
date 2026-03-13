@@ -77,6 +77,9 @@ require_once __DIR__ . '/../includes/header.php';
             <div style="grid-column:1/-1"><span class="form-label">Narrative Description</span><p style="white-space:pre-wrap;"><?= sanitize($viewItem['description']) ?></p></div>
             <div><span class="form-label">Date Filed</span><p><?= formatDateTime($viewItem['filed_at']) ?></p></div>
             <div><span class="form-label">Filed By</span><p><?= sanitize($viewItem['fname'] . ' ' . $viewItem['lname']) ?> (<?= sanitize($viewItem['email']) ?>)</p></div>
+            <?php $attachments = getAttachments('blotter', $viewItem['id']); if (!empty($attachments)): ?>
+            <div style="grid-column:1/-1"><?= renderAttachments($attachments) ?></div>
+            <?php endif; ?>
         </div>
 
         <form method="POST">

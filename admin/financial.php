@@ -80,6 +80,9 @@ require_once __DIR__ . '/../includes/header.php';
             <div style="grid-column:1/-1"><span class="form-label">Supporting Details</span><p><?= sanitize($viewItem['supporting_details']) ?></p></div>
             <?php endif; ?>
             <div><span class="form-label">Date Filed</span><p><?= formatDateTime($viewItem['filed_at']) ?></p></div>
+            <?php $attachments = getAttachments('financial', $viewItem['id']); if (!empty($attachments)): ?>
+            <div style="grid-column:1/-1"><?= renderAttachments($attachments) ?></div>
+            <?php endif; ?>
         </div>
         <form method="POST">
             <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
